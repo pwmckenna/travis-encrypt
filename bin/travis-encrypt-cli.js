@@ -13,7 +13,7 @@ var argv = optimist
     .alias('r', 'repo')
     .alias('r', 'repository')
     .describe('r', 'repository slug')
-    
+
     .string('k')
     .alias('k', 'key')
     .alias('k', 'name')
@@ -52,7 +52,7 @@ var argv = optimist
     .argv;
 
 var displayEncryptedValue = function (slug, name, value, username, password) {
-    return encrypt(slug, name + '=' + value, username, password, function (err, res) {
+    return encrypt(slug, (name === true ? '' : name + '=') + value, username, password, function (err, res) {
         console.log('# ' + name.grey);
         if (err) {
             console.warn(err.toString().red);

@@ -13,7 +13,7 @@ var argv = optimist
     .alias('r', 'repo')
     .alias('r', 'repository')
     .describe('r', 'repository slug')
-    
+
     .string('k')
     .alias('k', 'key')
     .alias('k', 'name')
@@ -43,17 +43,20 @@ var argv = optimist
             throw 'insufficient github credentials';
         }
 
-        if (!(args.hasOwnProperty('n') && args.hasOwnProperty('v')) &&
-            !args.hasOwnProperty('j')
+        if (!(args.hasOwnProperty('v')) && !args.hasOwnProperty('j')
         ) {
-            throw 'must provide a key/value pair or a json file of variables to encrypt';
+            throw 'must provide a value or a json file of variables to encrypt';
         }
     })
     .argv;
 
 var displayEncryptedValue = function (slug, name, value, username, password) {
-    return encrypt(slug, name + '=' + value, username, password, function (err, res) {
-        console.log('# ' + name.grey);
+    /* if name is provided, then prepend to value as a name / value pair */
+    if (name) {
+      value = name + '=' + value;
+    }
+    return encrypt(slug, value, username, password, function (err, res) {
+        console.log('# ' + (name || 'undefined').grey);
         if (err) {
             console.warn(err.toString().red);
         } else {

@@ -38,7 +38,10 @@ travis-encrypt -r pwmckenna/private-repo -u pwmckenna -p password EXAMPLE_ENV_VA
 > Rjxi+LG/lIqx27bAwIJbEnOZfxBuGCkJrlymsEKz7efE8b2nwgBXzeVNNhu4eg76IwMcgXL5QxrsYhwRMyXGcsOcBA=
 ```
 
+##### output:
+
 Take the output and add it as secure environment variables in your *.travis.yml* file.
+
 ```yml
 language: node_js
 node_js:
@@ -49,9 +52,14 @@ env:
 ```
 
 ## Module
+
+This module can also be required and used programatically:
+
 ```js
 var encrypt = require('travis-encrypt');
-encrypt('pwmckenna/node-travis-encrypt', 'EXAMPLE_ENV_VARIABLE=asdf', function (err, blob) {
+
+// for public repos:
+encrypt('pwmckenna/node-travis-encrypt', 'EXAMPLE_ENV_VARIABLE=asdf', undefined, undefinedfunction (err, blob) {
   // do something with the encrypted data blob...
 });
 

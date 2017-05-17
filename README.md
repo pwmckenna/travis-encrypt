@@ -93,4 +93,13 @@ encrypt({
 }, function (err, blob) {
   // do something with the encrypted data blob...
 });
+
+// ...if you may want to use github token to login to travis pro.
+encrypt({
+  repo: 'pwmckenna/private-repo',
+  data: 'EXAMPLE_ENV_VARIABLE=asdf',
+  token: 'github-token'
+}, function (err, blob) {
+  // do something with the encrypted data blob...
+});
 ```
